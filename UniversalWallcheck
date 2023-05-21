@@ -1,1 +1,45 @@
-print('U fucking ape')
+--// Made by cdzn :)
+--// Figure out how to implement it dont fucking dm me
+
+--: Code :
+
+
+--> Start of locals <--
+
+local lplr = game.Players.LocalPlayer
+local CurrentCamera = workspace.CurrentCamera
+local worldToViewportPoint = CurrentCamera.worldToViewportPoint
+
+--;
+
+
+--: Function :
+
+local function IsPartVisible(part, partDescendant)
+    local origin = CurrentCamera.CFrame.p
+    local _, onScreen = worldToViewportPoint(CurrentCamera, part.Position)
+    if onScreen then
+        local newRay = Ray.new(origin, part.Position - origin)
+        local partHit, _ = workspace:FindPartOnRayWithIgnoreList(newRay, {lplr.Character, CurrentCamera})
+        local visible = (not partHit or partHit:IsDescendantOf(partDescendant))
+        return visible
+    end
+    return false
+end
+
+--;
+
+
+--: Example from my old esp lib :
+
+			if getgenv().Settings.W then
+				  if not IsPartVisible(RootPart, v.Character) then
+                        
+                        getgenv().Settings.Lc = Color3.new(1,0,0)
+                        else
+                            
+                         getgenv().Settings.Lc = Color3.new(0,1,0) 
+                    end
+       end
+
+--;
